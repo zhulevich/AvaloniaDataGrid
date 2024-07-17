@@ -41,27 +41,28 @@ namespace AvaloniaDataGrid.Views
                 using (var reader = new StreamReader("C:\\Users\\vlas\\Desktop\\BIP.csv"))
                 using (var csv = new CsvReader(reader, config))
                 {
+                    var csvData = new List<string[]>();
+                    while (csv.Read())
+                    {
+                        csvData.Add(new string[] { csv.GetField(0), csv.GetField(1), csv.GetField(2), csv.GetField(3) });
+                    }
+
                     string[,] OutputArray = new string[substanceList.Count + 1, substanceList.Count + 1];
-                    
+
                     for (int a = 1; a < substanceList.Count + 1; a++)
                     {
                         OutputArray[a, 0] = substanceList[a - 1];
                         OutputArray[0, a] = substanceList[a - 1];
-                        
 
                         for (int b = 1; b < substanceList.Count + 1; b++)
                         {
-                            while (csv.Read())
+                            foreach (var row in csvData)
                             {
-                                if ((substanceList[a - 1] + '/' + substanceList[b - 1] == csv.GetField(3)) ||
-                                    (substanceList[b - 1] + '/' + substanceList[a - 1] == csv.GetField(3)))
+                                if ((substanceList[a - 1] + '/' + substanceList[b - 1] == row[3]) ||
+                                    (substanceList[b - 1] + '/' + substanceList[a - 1] == row[3]))
                                 {
-                                    OutputArray[a, b] = csv.GetField(2);
+                                    OutputArray[a, b] = row[2];
                                     break;
-                                }
-                                else
-                                {
-                                    OutputArray[a, b] = "-";
                                 }
                             }
                         }
