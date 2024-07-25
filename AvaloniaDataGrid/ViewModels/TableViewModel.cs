@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ReactiveUI;
 
 namespace AvaloniaDataGrid.ViewModels
 {
-    public class TableViewModel : ViewModelBase
+    public class TableViewModel : ReactiveObject
     {
         public ObservableCollection<TableRow> TableData { get; } = new ObservableCollection<TableRow>();
         public List<string> ColumnHeaders { get; } = new List<string>();
@@ -30,7 +31,7 @@ namespace AvaloniaDataGrid.ViewModels
         }
     }
 
-    public class TableRow : ViewModelBase
+    public class TableRow : ReactiveObject
     {
         public List<string> Columns { get; } = new List<string>();
     }

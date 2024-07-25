@@ -28,8 +28,9 @@
 		<TabItem Header="Таблица">
 			
 			<spreadalonia:Spreadsheet 
-				CurrentData="{Binding TableDataSpread}">
-				
+				CurrentData="{Binding TableDataSpread}"
+				MaxColumnCount="{Binding MaxColumnCount}"
+				MaxRowCount="{Binding MaxRowCount}">	
 			</spreadalonia:Spreadsheet>
 		</TabItem>
 	</TabControl>
